@@ -1,5 +1,5 @@
 /*Author: Chaoyi Long <chaoyilong@mail.sdu.edu.cn>,Jan 16th,2025*/
-
+ 
 #include "structure.h"
 
 #ifndef APP_NAME
