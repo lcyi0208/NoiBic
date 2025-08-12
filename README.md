@@ -132,7 +132,7 @@ It implements two evaluation standards:
 
 ---
 
-### (i). Jaccard-based Recovery & Relevance
+### 1. Jaccard-based Recovery & Relevance
 
 For a pair of biclusters $\( e \in G \)$ and $\( f \in D \)$:
 
@@ -156,7 +156,7 @@ $$\text{Relevance}(G, D) = \frac{1}{|D|} \sum_{f \in D} \max_{e \in G} J(e, f)$$
 
 ---
 
-### (ii). Asymmetric Recovery / Relevance
+### 2. Asymmetric Recovery / Relevance
 These metrics measure overlap relative to only one bicluster’s area:
 - **Pairwise Recovery:**
 
