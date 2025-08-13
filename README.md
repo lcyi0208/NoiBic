@@ -44,7 +44,7 @@ make BOOST_INCLUDE=/your/boost/dir
 ```
 The specific parameter list for each step of the algorithm is as follows.
 
-### Input
+**Input**
 
 ```bash
 -i : The input file must be in one of two tab-delimited formats: 
@@ -52,7 +52,7 @@ The specific parameter list for each step of the algorithm is as follows.
      gene1      2.4      3.5     -2.4 
      gene2     -2.1      0.0      1.2
 ```
-### Data Preprocessing
+**Data Preprocessing**
 
 ```bash
 -q : Remove non-expressed data based on numerical values   
@@ -65,7 +65,7 @@ The specific parameter list for each step of the algorithm is as follows.
 -z : Exclude zero values from clustering.   
      Binary variable (0 or 1), default: 0.
 ```
-### Biclustering
+**Biclustering**
 
 ```bash
 -l : Permissible mismatch rate during element swapping when searching   
@@ -78,7 +78,7 @@ The specific parameter list for each step of the algorithm is as follows.
 -t : Number of threads for multi-threaded execution.   
      Positive integer, default: 16. 
 ```
-### Expansion
+**Expansion**
 
 ```bash
 -e : Permissible error rate during bicluster expansion.   
@@ -87,7 +87,7 @@ The specific parameter list for each step of the algorithm is as follows.
      Floating-point value in the range [0, 1], or 2 to disable column expansion.   
      Default: 0.2. 
 ```
-### Output
+**Output**
 
 ```bash
 -c : Minimum number of columns in a block.   
