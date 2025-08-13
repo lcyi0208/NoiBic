@@ -107,7 +107,7 @@ The specific parameter list for each step of the algorithm is as follows.
 ```
 ## Example
 ```bash
-./noibic -i ./test/toy.txt -p output -q 0.5 -o 3
+./noibic -i ./test/toy.txt -p ./test/found -q 0.5 -o 3
 ```
 Running the above command produces output.blocks.
 In the .blocks file, the first line contains the algorithm’s runtime parameters, the second line shows the number of output biclusters, and the subsequent lines present the detailed information for each BC.
@@ -186,6 +186,7 @@ Biclusters are separated by a **blank line**.
 
 ### Usage
 Command-line example:
+
 ```bash
 python bicluster_metrics.py --expected expected.txt --found predicted.txt --metric jaccard --show-matrix
 ```
@@ -203,15 +204,24 @@ Parameters:
 
 - --show-matrix → If set, prints a pairwise similarity matrix (rows=expected, cols=found)
 
+For example, using the found.blocks file generated from the above noibic usage example, we first convert it into the bicluster_metrics.py format:
+```bash
+python convert_biclusters.py found.blocks predicted
+```
+Then, we calculate the relevance and recovery values:
+
+```bash
+python bicluster_metrics.py --expected put.txt --found predicted --metric jaccard --show-matrix
+```
 ---
 ### Output
 Example:
 ```bash
-# Metric: jaccard Recovery (S(G,D))=0.875000 Relevance (S(D,G))=0.842105
+('# Metric:', 'jaccard', 'Recovery (S(G,D))=1.00000000', 'Relevance (S(D,G))=1.00000000')
 # Pairwise score matrix (rows=expected, cols=found):
-0.000000 0.800000 0.000000
-1.000000 0.000000 0.000000
-0.000000 0.000000 0.750000
+0.00000000 1.00000000 0.00000000
+0.00000000 0.00000000 1.00000000
+1.00000000 0.00000000 0.00000000
 ```
 - **Recovery / Relevance values:** Overall summary scores
 
