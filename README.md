@@ -171,7 +171,7 @@ Parameters:
 
 - --show-matrix → If set, prints a pairwise similarity matrix (rows=expected, cols=found)
 
-### Output
+### 5. Output
 Example:
 ```bash
 ('# Metric:', 'jaccard', 'Recovery (S(G,D))=1.00000000', 'Relevance (S(D,G))=1.00000000')
