@@ -6,6 +6,7 @@ A noise-tolerant biclustering algorithm for analyzing gene expression data at va
 - [Installation](#installation)
 - [Usage](#usage)
 - [Example](#example)
+- [Workflow for Simulated Data Generation and Evaluation](#workflow-for-simulated-sata-generation-and-valuation)
 - [Bicluster Similarity Metrics](#bicluster-similarity-metrics)
   
 ## Installation:
@@ -121,6 +122,62 @@ NC_Genes [8]: gene41 gene47 ...
 Conds [20]: cond40 cond41 cond42 ...
 ...
 ```
+## Workflow for Simulated Data Generation and Evaluation
+In the simulated data experiments presented in this study, we utilized [BiBench](https://github.com/xguse/BiBench) to generate synthetic datasets and to compute relevance and recovery metrics. To simplify the testing process and avoid potential installation difficulties with BiBench, we provide a Python script that implements analogous functionality for basic evaluation purposes.
+**1.Synthetic data generation using** synthetic_bicluster.py
+For example:
+```bash
+python synthetic_bicluster.py --output_data ./input --output_clusters ./expected.txt --cols 200 --rows 200 --clustcols 20 --clustrows 20 --clusts 3
+```
+Detailed descriptions of the command-line parameters can be accessed via:
+```bash
+python synthetic_bicluster.py --help
+```
+**2.Clustering the generated dataset with Noibic**
+```bash
+/path/to/noibic -i ./input -q 0.5 -o 3
+```
+**3.Format conversion**
+Use convert_biclusters.py to transform the clustering output into the required format, where each bicluster is represented by two consecutive lines:
+Row indices — space-separated integers.
+Column indices — space-separated integers.
+Each bicluster is separated from the next by a blank line. 
+For example:
+```bash
+python convert_biclusters.py input.blocks predicted
+```
+**Metric computation**
+Command line example:
+```bash
+python bicluster_metrics.py --expected expected.txt --found predicted --metric jaccard --show-matrix
+```
+Parameters:
+
+- --expected / -g → File containing ground-truth biclusters
+
+- --found / -d → File containing predicted biclusters
+
+- --metric / -m
+
+  - jaccard = Jaccard-based Recovery & Relevance
+
+  - rr = Asymmetric Recovery/Relevance
+
+- --show-matrix → If set, prints a pairwise similarity matrix (rows=expected, cols=found)
+
+**Output**
+Example:
+```bash
+('# Metric:', 'jaccard', 'Recovery (S(G,D))=1.00000000', 'Relevance (S(D,G))=1.00000000')
+# Pairwise score matrix (rows=expected, cols=found):
+0.00000000 1.00000000 0.00000000
+0.00000000 0.00000000 1.00000000
+1.00000000 0.00000000 0.00000000
+```
+- **Recovery / Relevance values:** Overall summary scores
+
+- **Matrix:** Each entry $(i,j)$ is the chosen similarity metric between expected $[i]$ and found $[j]$ .
+
 ## Bicluster Similarity Metrics
 When the biclusters embedded in the input matrix are known, the clustering results are assessed using the following criteria. We computes list-wise bicluster similarity between two sets of biclusters:
 
@@ -173,56 +230,3 @@ List-level definitions follow the same “average best-match” idea:
 - **Recovery $(S(G, D))$** = Average of the best recovery $(e,f)$ values for each $e$ in $G$
 - **Relevance $(S(D, G))$** = Average of the best relevance $(e,f)$ values for each $f$ in $D$
 ---
-
-### Input File Format
-
-Each bicluster is described using **two lines**:
-1. Row indices (space-separated integers)
-2. Column indices (space-separated integers)
-
-Biclusters are separated by a **blank line**.  
-
----
-
-### Usage
-Command-line example:
-
-```bash
-python bicluster_metrics.py --expected expected.txt --found predicted.txt --metric jaccard --show-matrix
-```
-Parameters:
-
-- --expected / -g → File containing ground-truth biclusters
-
-- --found / -d → File containing predicted biclusters
-
-- --metric / -m
-
-  - jaccard = Jaccard-based Recovery & Relevance
-
-  - rr = Asymmetric Recovery/Relevance
-
-- --show-matrix → If set, prints a pairwise similarity matrix (rows=expected, cols=found)
-
-For example, using the found.blocks file generated from the above noibic usage example, we first convert it into the bicluster_metrics.py format:
-```bash
-python convert_biclusters.py found.blocks predicted
-```
-Then, we calculate the relevance and recovery values:
-
-```bash
-python bicluster_metrics.py --expected put.txt --found predicted --metric jaccard --show-matrix
-```
----
-### Output
-Example:
-```bash
-('# Metric:', 'jaccard', 'Recovery (S(G,D))=1.00000000', 'Relevance (S(D,G))=1.00000000')
-# Pairwise score matrix (rows=expected, cols=found):
-0.00000000 1.00000000 0.00000000
-0.00000000 0.00000000 1.00000000
-1.00000000 0.00000000 0.00000000
-```
-- **Recovery / Relevance values:** Overall summary scores
-
-- **Matrix:** Each entry $(i,j)$ is the chosen similarity metric between expected $[i]$ and found $[j]$ .
