@@ -6,7 +6,7 @@ A noise-tolerant biclustering algorithm for analyzing gene expression data at va
 - [Installation](#installation)
 - [Usage](#usage)
 - [Example](#example)
-- [Workflow for Simulated Data Generation and Evaluation](#workflow-for-simulated-sata-generation-and-evaluation)
+- [Workflow for Simulated Data Generation and Evaluation](#workflow-for-simulated-data-generation-and-evaluation)
 - [Bicluster Similarity Metrics](#bicluster-similarity-metrics)
   
 ## Installation:
