@@ -107,6 +107,7 @@ The specific parameter list for each step of the algorithm is as follows.
      Defaults to the input file name.  
 ```
 ## Example
+
 ```bash
 ./noibic -i ./test/toy.txt -p ./test/found -q 0.5 -o 3
 ```
@@ -122,21 +123,25 @@ NC_Genes [8]: gene41 gene47 ...
 Conds [20]: cond40 cond41 cond42 ...
 ...
 ```
+
 ## Workflow for Simulated Data Generation and Evaluation
 In the simulated data experiments presented in this study, we utilized [BiBench](https://github.com/xguse/BiBench) to generate synthetic datasets and to compute relevance and recovery metrics. To simplify the testing process and avoid potential installation difficulties with BiBench, we provide a Python script that implements analogous functionality for basic evaluation purposes.
 
 ### 1. Synthetic data generation using synthetic_bicluster.py
 
 For example:
+
 ```bash
 python synthetic_bicluster.py --output_data ./input --output_clusters ./expected.txt --cols 200 --rows 200 --clustcols 20 --clustrows 20 --clusts 3
 ```
 Detailed descriptions of the command-line parameters can be accessed via:
+
 ```bash
 python synthetic_bicluster.py --help
 ```
 
 ### 2. Clustering the generated dataset with Noibic
+
 ```bash
 /path/to/noibic -i ./input -q 0.5 -o 3
 ```
@@ -146,6 +151,7 @@ Row indices — space-separated integers.
 Column indices — space-separated integers.
 Each bicluster is separated from the next by a blank line. 
 For example:
+
 ```bash
 python convert_biclusters.py input.blocks predicted
 ```
@@ -153,6 +159,7 @@ python convert_biclusters.py input.blocks predicted
 ### 4. Metric computation
 
 Command line example:
+
 ```bash
 python bicluster_metrics.py --expected expected.txt --found predicted --metric jaccard --show-matrix
 ```
@@ -172,7 +179,9 @@ Parameters:
 - --show-matrix → If set, prints a pairwise similarity matrix (rows=expected, cols=found)
 
 ### 5. Output
+
 Example:
+
 ```bash
 ('# Metric:', 'jaccard', 'Recovery (S(G,D))=1.00000000', 'Relevance (S(D,G))=1.00000000')
 # Pairwise score matrix (rows=expected, cols=found):
@@ -183,6 +192,7 @@ Example:
 - **Recovery / Relevance values:** Overall summary scores
 
 - **Matrix:** Each entry $(i,j)$ is the chosen similarity metric between expected $[i]$ and found $[j]$ .
+
 
 ## Bicluster Similarity Metrics
 When the biclusters embedded in the input matrix are known, the clustering results are assessed using the following criteria. We computes list-wise bicluster similarity between two sets of biclusters:
