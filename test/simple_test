@@ -1,0 +1,35 @@
+#!/bin/bash
+#step1 Synthetic data generation
+mkdir data
+for i in 75 100;do
+    for j in 10000 12500 15000 17500 20000;do
+        python synthetic_bicluster.py --output_data ./data/${j}_${i} --output_clusters ./data/${j}_${i}_put --cols ${i} --rows ${j} --clustcols 20 --clustrows 500 --clusts 3
+    done
+done
+
+#Step2 Clustering the generated dataset with Noibic
+mkdir time_mem_out
+for i in 75 100;do
+    for j in 10000 12500 15000 17500 20000;do
+        nohup /usr/bin/time -v /home/longchaoyi_mem/test/NoiBic/noibic -i ./data/${j}_${i} -q 0.5 -o 3 > ./time_mem_out/out_${j}_${i} 2>&1 &
+    done
+done
+wait
+
+#Step3 Format conversion
+mkdir found
+for i in 75 100;do
+    for j in 10000 12500 15000 17500 20000;do
+        python convert_biclusters.py ./data/${j}_${i}.blocks ./found/${j}_${i}
+    done
+done
+
+#Step4 Metric computation
+mkdir rel_rec
+for i in 75 100;do
+    for j in 10000 12500 15000 17500 20000;do
+        python bicluster_metrics.py --expected ./data/${j}_${i}_put --found ./found/${j}_${i} --metric jaccard > ./rel_rec/${j}_${i}
+    done
+done
+
+
