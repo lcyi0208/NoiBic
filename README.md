@@ -14,7 +14,7 @@ A noise-tolerant biclustering algorithm for analyzing gene expression data at va
 
  Boost >= 1.47.0
 
- ### Installing Boost
+ **Installing Boost**
  
  ```bash
  
@@ -31,7 +31,7 @@ A noise-tolerant biclustering algorithm for analyzing gene expression data at va
 
     $ ./b2 install --prefix=/your/boost/dir
 ```
-### Installing NoiBic
+**Installing NoiBic**
 
 ```bash
 git clone https://github.com/lcyi0208/NoiBic.git
@@ -124,7 +124,9 @@ Conds [20]: cond40 cond41 cond42 ...
 ```
 ## Workflow for Simulated Data Generation and Evaluation
 In the simulated data experiments presented in this study, we utilized [BiBench](https://github.com/xguse/BiBench) to generate synthetic datasets and to compute relevance and recovery metrics. To simplify the testing process and avoid potential installation difficulties with BiBench, we provide a Python script that implements analogous functionality for basic evaluation purposes.
-**1.Synthetic data generation using** synthetic_bicluster.py
+
+### 1. Synthetic data generation using synthetic_bicluster.py
+
 For example:
 ```bash
 python synthetic_bicluster.py --output_data ./input --output_clusters ./expected.txt --cols 200 --rows 200 --clustcols 20 --clustrows 20 --clusts 3
@@ -133,11 +135,12 @@ Detailed descriptions of the command-line parameters can be accessed via:
 ```bash
 python synthetic_bicluster.py --help
 ```
-**2.Clustering the generated dataset with Noibic**
+
+### 2. Clustering the generated dataset with Noibic
 ```bash
 /path/to/noibic -i ./input -q 0.5 -o 3
 ```
-**3.Format conversion**
+### 3. Format conversion
 Use convert_biclusters.py to transform the clustering output into the required format, where each bicluster is represented by two consecutive lines:
 Row indices — space-separated integers.
 Column indices — space-separated integers.
@@ -146,11 +149,14 @@ For example:
 ```bash
 python convert_biclusters.py input.blocks predicted
 ```
-**Metric computation**
+
+### 4. Metric computation
+
 Command line example:
 ```bash
 python bicluster_metrics.py --expected expected.txt --found predicted --metric jaccard --show-matrix
 ```
+
 Parameters:
 
 - --expected / -g → File containing ground-truth biclusters
@@ -165,7 +171,7 @@ Parameters:
 
 - --show-matrix → If set, prints a pairwise similarity matrix (rows=expected, cols=found)
 
-**Output**
+### Output
 Example:
 ```bash
 ('# Metric:', 'jaccard', 'Recovery (S(G,D))=1.00000000', 'Relevance (S(D,G))=1.00000000')
