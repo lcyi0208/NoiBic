@@ -6,7 +6,7 @@ A noise-tolerant biclustering algorithm for analyzing gene expression data at va
 - [Installation](#installation)
 - [Usage](#usage)
 - [Example](#example)
-- [Workflow for Simulated Data Generation and Evaluation](#workflow-for-simulated-sata-generation-and-valuation)
+- [Workflow for Simulated Data Generation and Evaluation](#workflow-for-simulated-sata-generation-and-evaluation)
 - [Bicluster Similarity Metrics](#bicluster-similarity-metrics)
   
 ## Installation:
@@ -192,8 +192,6 @@ When the biclusters embedded in the input matrix are known, the clustering resul
 - D (Found): Biclusters discovered by an algorithm
 
 It implements two evaluation standards:
-
----
 
 ### 1. Jaccard-based Recovery & Relevance
 
