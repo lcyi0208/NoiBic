@@ -266,3 +266,4 @@ void result_output(char *_out);
 PIN OverlapCal(size_t x1, size_t x2);
 
 size_t seed_cal(Node S, size_t col);
+// Initial commit (no-op)
