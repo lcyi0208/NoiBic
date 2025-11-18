@@ -11,7 +11,7 @@ done
 mkdir time_mem_out
 for i in 75 100;do
     for j in 10000 12500 15000 17500 20000;do
-        nohup /usr/bin/time -v /home/longchaoyi_mem/test/NoiBic/noibic -i ./data/${j}_${i} -q 0.5 -o 3 > ./time_mem_out/out_${j}_${i} 2>&1 &
+        nohup /usr/bin/time -v ../noibic -i ./data/${j}_${i} -q 0.5 -o 3 > ./time_mem_out/out_${j}_${i} 2>&1 &
     done
 done
 wait
