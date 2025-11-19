@@ -82,7 +82,7 @@ static void init_options() {
   po->SEED_NUM = 500;
   po->FILTER = 0.8;
   po->MIN_LENGTH=0.0;	  
-  po->THREADS_NUM=16;
+  po->THREADS_NUM=32;
   po->IS_SINGLE_CELL_DATA=0;
   po->SINGLE_CELL_PROCESSING=0;
   po->ZERO_CLEAN=0;
