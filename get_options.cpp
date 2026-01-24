@@ -55,7 +55,7 @@ $ ./noibic -i filename [argument list]\n\
 -m : Minimum block size as a fraction of the original matrix dimensions.\n\
     Floating-point value in the range [0, 1], default:0.0.\n\
 -f : Overlap filtering threshold for biclusters.  \n\
-     Floating-point value in the range [0, 1.0], default: 1 (no filtering).  \n\
+     Floating-point value in the range [0, 1.0], default: 0.8.  \n\
 -S : Specify whether the input data is single-cell data.  \n\
      Binary variable (0 or 1), default: 0.  \n\
 -o : Number of biclusters to report.  \n\
