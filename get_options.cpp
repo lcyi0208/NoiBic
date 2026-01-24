@@ -51,7 +51,7 @@ $ ./noibic -i filename [argument list]\n\
 -c : Minimum number of columns in a block.  \n\
      Integer ≥ 3, default: 6.  \n\
 -r : Minimum number of rows in a block.  \n\
-     Integer ≥ 3, default: 8.  \n\
+     Integer ≥ 3, default: 4.  \n\
 -m : Minimum block size as a fraction of the original matrix dimensions.\n\
     Floating-point value in the range [0, 1], default:0.0.\n\
 -f : Overlap filtering threshold for biclusters.  \n\
