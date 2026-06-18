@@ -1,5 +1,5 @@
 #include "structure.h"
-
+using namespace std;
 
 /* global data */
 

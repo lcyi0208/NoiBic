@@ -1,11 +1,11 @@
 PROGS = noibic
-SRCS  = main.cpp struct.cpp get_options.cpp data_processing.cpp cluster.cpp cluster_expand.cpp LCS.cpp result_output.cpp seed_cal.cpp seed_generation.cpp
+SRCS  = main.cpp struct.cpp get_options.cpp data_processing.cpp cluster.cpp cluster_expand.cpp LCS.cpp result_output.cpp candidate_column_cal.cpp seed_generation.cpp
 OBJS  = $(SRCS:.cpp=.o)
 CC    = g++
 BOOST_INCLUDE ?= /usr/include
 
 LDFLAGS  = -lm -pthread
-CPPFLAGS = -std=c++0x -O3 -g -I $(BOOST_INCLUDE) -pthread
+CPPFLAGS = -std=c++17 -O3 -g -I $(BOOST_INCLUDE) -pthread
 
 
 VERSION ?= 1.0.1
