@@ -10,7 +10,7 @@ A noise-tolerant biclustering algorithm for analyzing gene expression data at va
 - [Bicluster Similarity Metrics](#bicluster-similarity-metrics)
   
 ## Installation:
- g++ with support for C++11 (e.g. 8.4.0)
+ g++ with support for C++17 (e.g. 9.3.0)
 
  Boost >= 1.47.0
 
