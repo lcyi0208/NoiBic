@@ -186,6 +186,7 @@ struct Prog_options
 	size_t ROW_WIDTH = 0;
 	size_t SEED_NUM = 0;
 	size_t BLOCK_NUM = 0;
+	size_t SEED_NUM_MULTIPLIER = 20;
 	size_t SEED_SELECT_MODE = 0;
 	size_t SEED_POOL_MULTIPLIER = 1;
 

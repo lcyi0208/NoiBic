@@ -148,9 +148,10 @@ void result_output(char *_out)
            << " a:" << po->ABSOLUTE_QUANTILE
            << " N:" << (int)po->NORMALIZATION
            << " l:" << po->LCS_TOLERANCE
-           << " n:" << po->CLUSTER_WIDTH
+           << " n:" << po->CLUSTER_SIZE
            << " d:" << po->DISCRETIZATION
            << " M:" << po->SEED_SELECT_MODE
+           << " k:" << po->SEED_NUM_MULTIPLIER
            << " u:" << po->SEED_POOL_MULTIPLIER
            << " t:" << po->THREADS_NUM
            << " e:" << po->EXPAND_TOLERANCE
@@ -176,7 +177,7 @@ void result_output(char *_out)
         sort(de.begin(), de.end());
         sort(cols.begin(), cols.end());
 
-        output << "BC: " << i << "\n";
+        output << "BC: " << t << "\n";
 
         output << "PC_Genes [" << in.size() << "]: ";
         for (size_t x : in)

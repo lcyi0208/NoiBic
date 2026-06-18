@@ -35,6 +35,8 @@ $(PROGS): $(OBJS)
 %.o: %.cpp
 	$(CC) $(CPPFLAGS) -c $< -o $@
 
+$(OBJS): structure.h
+
 version:
 	@echo "$(PROGS) version: $(FULL_VERSION)"
 	@echo "built at: $(BUILD_DATE) on $(HOST)"

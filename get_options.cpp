@@ -27,9 +27,11 @@ $ ./noibic -i filename [argument list]\n\
 [Seeding]\n\
 -M : Seed selection mode. 0 keeps the original top-k strategy; 1 enables row-diverse selection; 2 enables random selection; 3 keeps all qualified seeds.  \n\
 	     Integer value 0, 1, 2, or 3; default: 1.  \n\
+-k : Seed number multiplier. seed_num is derived as k * -o.  \n\
+	     Positive integer, default: 20.  \n\
 -u : Candidate seed pool multiplier. Each worker keeps up to u * seed_num candidates.  \n\
 	     Positive integer, default: 5.  \n\
-	     seed_num is derived as 20 * -o; row-diverse gap uses rows / seed_num.  \n\
+	     row-diverse gap uses rows / seed_num.  \n\
 ===================================================================\n\
 [Data Preprocessing]\n\
 -q : Remove non-expressed data based on numerical values  \n\
@@ -148,7 +150,8 @@ static void init_options()
   po->NORMALIZATION = 0;
 
   po->BLOCK_NUM = 30;
-  po->SEED_NUM = 20 * po->BLOCK_NUM;
+  po->SEED_NUM_MULTIPLIER = 20;
+  po->SEED_NUM = po->SEED_NUM_MULTIPLIER * po->BLOCK_NUM;
   po->SEED_SELECT_MODE = 1;
   po->SEED_POOL_MULTIPLIER = 5;
   po->FILTER = 0.8;
@@ -184,7 +187,7 @@ void get_options(int argc, char *argv[])
    *followed by two colons (::), its argument is optional if an option character
    *is followed by no colons, it does not need argument
    */
-  while ((op = getopt(argc, argv, "i:w:p:l:b:d:q:a:e:f:c:r:o:m:t:S:n:N:M:u:h")) > 0)
+  while ((op = getopt(argc, argv, "i:w:p:l:b:d:q:a:e:f:c:r:o:m:t:S:n:N:M:k:u:h")) > 0)
   {
     switch (op)
     {
@@ -227,6 +230,14 @@ void get_options(int argc, char *argv[])
       if (!parse_size_t(optarg, po->SEED_SELECT_MODE))
       {
         err("-M should be an integer value of 0/1/2/3");
+        is_valid = false;
+      }
+      break;
+
+    case 'k':
+      if (!parse_size_t(optarg, po->SEED_NUM_MULTIPLIER))
+      {
+        err("-k should be a positive integer");
         is_valid = false;
       }
       break;
@@ -290,15 +301,6 @@ void get_options(int argc, char *argv[])
       {
         err("-o should be a positive integer");
         is_valid = false;
-      }
-      else if (po->BLOCK_NUM > numeric_limits<size_t>::max() / 20)
-      {
-        err("-o is too large to derive seed_num");
-        is_valid = false;
-      }
-      else
-      {
-        po->SEED_NUM = 20 * po->BLOCK_NUM;
       }
       break;
 
@@ -394,6 +396,12 @@ void get_options(int argc, char *argv[])
     is_valid = false;
   }
 
+  if (po->SEED_NUM_MULTIPLIER == 0)
+  {
+    err("-k seed number multiplier should be >0");
+    is_valid = false;
+  }
+
   if ((po->QUANTILE > 0.5) || (po->QUANTILE <= 0))
   {
     err("-q quantile discretization should be (0,.5]");
@@ -434,6 +442,19 @@ void get_options(int argc, char *argv[])
   {
     err("-o number of blocks to report should be >0");
     is_valid = false;
+  }
+
+  if (po->BLOCK_NUM > 0 && po->SEED_NUM_MULTIPLIER > 0)
+  {
+    if (po->BLOCK_NUM > numeric_limits<size_t>::max() / po->SEED_NUM_MULTIPLIER)
+    {
+      err("-o * -k overflows seed_num");
+      is_valid = false;
+    }
+    else
+    {
+      po->SEED_NUM = po->BLOCK_NUM * po->SEED_NUM_MULTIPLIER;
+    }
   }
 
   if ((po->MIN_LENGTH > 1) || (po->MIN_LENGTH < 0))
