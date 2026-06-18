@@ -39,6 +39,7 @@ $ ./noibic -i filename [argument list]\n\
      (see details in the Methods section of the paper).  \n\
 -a : Remove non-expressed data by index position.  \n\
      Binary variable (0 or 1), default: 0  \n\
+	 Recommended: set to 1 for matrices with more than 2000 rows.  \n\
      (see details in the Methods section of the paper).  \n\
 -N : Normalize input data before biclustering.\n\
      Binary variable (0 or 1), default: 0.\n\
