@@ -64,7 +64,9 @@ The specific parameter list for each step of the algorithm is as follows.
 
 ```bash
 -M : Seed selection mode. 0 keeps the original top-k strategy; 1 enables row-diverse selection; 2 enables random selection; 3 keeps all qualified seeds.  
-	     Integer value 0, 1, 2, or 3; default: 1. 
+	     Integer value 0, 1, 2, or 3; default: 1.
+-k : Seed number multiplier. seed_num is derived as k * -o.  
+	     Positive integer, default: 20.  
 -u : Candidate seed pool multiplier. Each worker keeps up to u * seed_num candidates.  
 	     Positive integer, default: 5.  
 	     seed_num is derived as 20 * -o; row-diverse gap uses rows / seed_num.  
