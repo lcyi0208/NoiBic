@@ -52,6 +52,22 @@ The specific parameter list for each step of the algorithm is as follows.
      o        cond1    cond2    cond3 
      gene1      2.4      3.5     -2.4 
      gene2     -2.1      0.0      1.2
+-w : Optional noise file.
+     A tab-delimited numeric matrix without row/column labels, with the same
+     dimensions as the input. Each entry is the allowed relative fluctuation of
+     the corresponding expression value. If omitted, row-wise CV is used.
+     Example:
+          0.10    0.15    0.12
+          0.08    0.10    0.09
+```
+**Seeding**
+
+```bash
+-M : Seed selection mode. 0 keeps the original top-k strategy; 1 enables row-diverse selection; 2 enables random selection; 3 keeps all qualified seeds.  
+	     Integer value 0, 1, 2, or 3; default: 1. 
+-u : Candidate seed pool multiplier. Each worker keeps up to u * seed_num candidates.  
+	     Positive integer, default: 5.  
+	     seed_num is derived as 20 * -o; row-diverse gap uses rows / seed_num.  
 ```
 **Data Preprocessing**
 
@@ -61,9 +77,7 @@ The specific parameter list for each step of the algorithm is as follows.
      (see details in the Methods section of the paper).   
 -a : Remove non-expressed data by index position.   
      Binary variable (0 or 1), default: 0      
--s : Replace zero values with random numbers drawn from N(0,1).   
-     Binary variable (0 or 1), default: 0.   
--z : Exclude zero values from clustering.   
+-N : Normalize input data before biclustering.
      Binary variable (0 or 1), default: 0.
 ```
 **Biclustering**
