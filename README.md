@@ -63,8 +63,12 @@ The specific parameter list for each step of the algorithm is as follows.
 **Seeding**
 
 ```bash
--M : Seed selection mode. 0 keeps the original top-k strategy; 1 enables row-diverse selection; 2 enables random selection; 3 keeps all qualified seeds.  
-	     Integer value 0, 1, 2, or 3; default: 1.
+-M : Seed selection mode.
+     0: Top-k — keeps the longest qualified seeds.
+     1: Row-diverse — scans qualified seeds from longest to shortest and filters redundant row pairs to improve row coverage.
+     2: Random — randomly selects from qualified seeds.
+     3: All — keeps all qualified seeds.
+     Integer value 0, 1, 2, or 3; default: 1.
 -k : Seed number multiplier. seed_num is derived as k * -o.  
 	     Positive integer, default: 20.  
 -u : Candidate seed pool multiplier. Each worker keeps up to u * seed_num candidates.  
