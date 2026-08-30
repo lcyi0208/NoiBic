@@ -25,11 +25,11 @@ $ ./noibic -i filename [argument list]\n\
           0.08    0.10    0.09\n\
 ===================================================================\n\
 [Seeding]\n\
--M : Seed selection mode. Controls how qualified seeds are selected after seed generation.\n\
-     0: Top-k selection — keeps the highest-ranked qualified seeds by seed length.\n\
-     1: Row-diverse selection — processes qualified seeds from longest to shortest and filters them to reduce repeated use of the same rows, preserving length priority while improving row diversity.\n\
-     2: Random selection — randomly selects seeds from the qualified candidate set.\n\
-     3: All-seed selection — keeps all qualified seeds without further filtering.\n\
+-M : Seed selection mode.\n\
+     0: Top-k — keeps the longest qualified seeds.\n\
+     1: Row-diverse — scans qualified seeds from longest to shortest and filters redundant row pairs to improve row coverage.\n\
+     2: Random — randomly selects from qualified seeds.\n\
+     3: All — keeps all qualified seeds.\n\
      Integer value 0, 1, 2, or 3; default: 1.\n\
 -k : Seed number multiplier. seed_num is derived as k * -o.  \n\
 	     Positive integer, default: 20.  \n\
