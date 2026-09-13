@@ -1,5 +1,5 @@
 # NoiBic
-A noise-tolerant biclustering algorithm for analyzing gene expression data at various scales.
+A noise-tolerant biclustering algorithm for high-throughput gene expression data analysis.
 
 ## Table of contents
 
