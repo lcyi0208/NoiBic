@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use NoiBic, please cite this software and the associated publication."
+title: "NoiBic: A Noise-Tolerant Biclustering Algorithm for High-Throughput Gene Expression Data Analysis"
+version: 1.0.1
+authors:
+  - family-names: "Long"
+    given-names: "Chaoyi"
+  - family-names: "Li"
+    given-names: "Jingxian"
+  - family-names: "Liu"
+    given-names: "Bingqiang"
+  - family-names: "Sun"
+    given-names: "Duanchen"
+  - family-names: "Li"
+    given-names: "Guojun"
+repository-code: "https://github.com/lcyi0208/NoiBic"
+license: MIT
+keywords:
+  - biclustering
+  - gene expression
+  - bioinformatics
+  - noise tolerance
